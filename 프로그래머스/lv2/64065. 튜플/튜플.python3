@@ -1,0 +1,28 @@
+def solution(str):
+    arr = []
+    temp_arr = set()
+    answer = []
+    temp_s = ''
+    for s in str:
+        if s.isdecimal():
+            temp_s += s
+        elif s == ',':
+            temp_arr.add(int(temp_s))
+            temp_s = ''
+        elif s == '}':
+            temp_arr.add(int(temp_s))
+            arr.append(temp_arr)
+        elif s == '{':
+            temp_s = ''
+            temp_arr = set()
+        else:
+            continue
+
+    arr.pop()
+    arr.sort(key=len)
+
+    answer.append(list(arr[0]))
+    for i in range(1, len(arr)):
+        answer.append(list(arr[i].difference(arr[i-1])))
+
+    return [x[0] for x in answer]
