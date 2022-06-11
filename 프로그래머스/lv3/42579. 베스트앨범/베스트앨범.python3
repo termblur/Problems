@@ -1,0 +1,30 @@
+def solution(genres, plays):
+    dic = {}
+    totals = []
+    answer = []
+    for idx, value in enumerate(genres):
+        if value in dic.keys():
+            dic[value].append([idx, plays[idx]])
+        else:
+            dic[value] = [[idx, plays[idx]]]
+        
+    for key, value in dic.items():
+        value.sort(key = lambda x:x[0])
+        value.sort(key = lambda x:x[1], reverse = True)
+        total = 0
+        for p in value:
+            total += p[1]
+        totals.append([key, total])
+    
+    totals.sort(key = lambda x:x[1], reverse = True)
+    
+    for t in totals:
+        cnt = 0
+        for k in dic[t[0]]:
+            if cnt < 2:
+                answer.append(k[0])
+                cnt += 1
+            else: 
+                break
+    
+    return answer
