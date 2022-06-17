@@ -1,0 +1,20 @@
+def solution(n):
+    
+    def paren(L, left, right):
+        if left > n or right > n or left < right:
+            return
+
+        if L == 2*n:
+            if left == right:
+                answer.append(1)
+
+        else:
+            if left > right:
+                paren(L+1, left, right+1)
+                paren(L+1, left+1, right)
+            elif left == right:
+                paren(L+1, left+1, right)
+    
+    answer = []
+    paren(0, 0, 0)
+    return len(answer)
