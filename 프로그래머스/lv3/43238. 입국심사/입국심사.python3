@@ -1,0 +1,20 @@
+def solution(n, times):
+
+    left = min(times)
+    right = max(times) * n
+    result = 0
+    
+    while left <= right:
+        mid = (left + right) // 2
+        answer = 0
+        for t in times:
+            answer += mid//t
+            if answer > n :
+                break 
+        if answer >= n:
+            right = mid-1
+            result = mid
+        elif answer < n:
+            left = mid+1
+            
+    return result
