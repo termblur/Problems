@@ -1,0 +1,27 @@
+from collections import deque
+def solution(n, edge):
+    answer = 0
+    dq = deque()
+    ch = [-1] * (n+1)
+    adj = [[] for _ in range(n+1)]
+    
+    for v in edge:
+        adj[v[0]].append(v[1])
+        adj[v[1]].append(v[0])
+    
+    dq.append(1)
+    ch[1] = 0
+    
+    while dq:
+        now = dq.popleft()
+        for v in adj[now]:
+            if ch[v] == -1:
+                dq.append(v)
+                ch[v] = ch[now]+1
+                
+    max_num = max(ch)
+    for s in ch:
+        if s == max_num:
+            answer += 1
+            
+    return answer
