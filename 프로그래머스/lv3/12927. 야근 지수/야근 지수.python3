@@ -1,0 +1,20 @@
+import heapq as hq
+def solution(n, works):
+    answer = 0
+    heap = []
+    
+    if sum(works) < n:
+        return 0
+    
+    for w in works:
+        hq.heappush(heap, (-w, w))
+    
+    while n > 0:
+        val = hq.heappop(heap)[1] - 1
+        hq.heappush(heap, (-val, val))
+        n -= 1
+
+    while heap:
+        answer += hq.heappop(heap)[1]**2
+    
+    return answer
