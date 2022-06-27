@@ -1,0 +1,30 @@
+def solution(distance, rocks, n):
+    rocks.append(0)
+    rocks.append(distance)
+    rocks.sort()
+    
+    l = 1
+    r = rocks[-1]
+    
+    def count(d):
+        cnt = 1
+        ep = rocks[0]
+        
+        for i in range(1, len(rocks)):
+            if rocks[i] - ep >= d:
+                cnt += 1      
+                ep = rocks[i]
+        
+        return cnt
+    
+    
+    
+    while l <= r:
+        mid = (l+r)//2
+        if count(mid) >= len(rocks)-n:
+            result = mid
+            l = mid + 1
+        else:
+            r = mid - 1
+            
+    return result
