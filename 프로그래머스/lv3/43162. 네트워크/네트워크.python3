@@ -1,0 +1,19 @@
+from collections import deque
+def solution(n, computers):
+    dq = deque()
+    ch = [0] * n
+    cnt = 0
+    
+    for k in range(n):
+        if ch[k] == 0:
+            dq.append(k)
+            cnt += 1
+    
+        while dq:
+            now = dq.popleft()
+            for i in range(n):
+                if computers[now][i] == 1 and ch[i] == 0:
+                    ch[i] = 1
+                    dq.append(i)
+    
+    return cnt
